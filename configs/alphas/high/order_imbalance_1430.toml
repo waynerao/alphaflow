@@ -1,0 +1,17 @@
+[identity]
+name          = "order_imbalance_1430"
+description   = "Top-of-book size imbalance from the 14:30 order-book snapshot"
+category      = "microstructure"
+tags          = ["order_book", "intraday"]
+formula       = "(sum(bid_size[1..N]) - sum(ask_size[1..N])) / (sum(bid_size[1..N]) + sum(ask_size[1..N]))"
+handler_class = "alphaflow.signal_builder.alphas.high.order_imbalance_1430.OrderImbalance1430"
+alpha_type    = "high"
+market_scope  = ["HK", "CN"]
+
+[data]
+required_inputs   = ["depth_intraday"]
+custom_exclusions = []
+
+[params]
+snapshot_time = "14:30"
+depth_levels  = 5

@@ -1,0 +1,10 @@
+model_id        = "hk_momentum"
+market          = "HK"
+alpha_ids       = ["momentum_price_21d", "order_imbalance_1430"]
+rtn_alpha_id    = "open_to_close_1d"
+start_date      = "20230101"
+end_date        = "20231231"
+save_to_parquet = true
+
+[alpha_weights]
+# Empty until OptimizerRunner.run() populates it.

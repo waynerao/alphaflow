@@ -1,0 +1,20 @@
+# Runtime configuration for alpha_aggregator only.
+
+[models]
+active_model_ids = ["hk_momentum"]
+
+[scheduler]
+daily_refresh_time           = "17:30"
+intraday_update_interval_sec = 5
+
+[threading]
+max_worker_threads   = 4
+daily_thread_name    = "daily_aggregator"
+intraday_thread_name = "intraday_aggregator"
+restart_on_failure   = true
+max_restart_attempts = 3
+
+[output]
+kdb_table_daily      = "alphaflow_scores_daily"
+kdb_table_intraday   = "alphaflow_scores_intraday"
+parquet_partition_by = "date"

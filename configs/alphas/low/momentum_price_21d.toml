@@ -1,0 +1,17 @@
+[identity]
+name          = "momentum_price_21d"
+description   = "21-day price momentum, skipping the most recent day to avoid short-term reversal"
+category      = "momentum"
+tags          = ["price", "trend"]
+formula       = "close(t - skip_days) / close(t - skip_days - lookback_days) - 1"
+handler_class = "alphaflow.signal_builder.alphas.low.momentum_price_21d.MomentumPrice21D"
+alpha_type    = "low"
+market_scope  = ["HK", "CN", "SG", "JP", "KR", "AU", "TW"]
+
+[data]
+required_inputs   = ["minute_bar"]
+custom_exclusions = []
+
+[params]
+lookback_days = 21
+skip_days     = 1

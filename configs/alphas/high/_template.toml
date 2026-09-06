@@ -1,0 +1,19 @@
+# Template for a HighAlpha (tick-level intraday).
+
+[identity]
+name          = "my_high_alpha"
+description   = "One line on what the signal captures"
+category      = "microstructure"
+tags          = []
+formula       = "Plain-language or pseudo-code statement of the calculation"
+handler_class = "alphaflow.signal_builder.alphas.high.my_high_alpha.MyHighAlpha"
+alpha_type    = "high"
+market_scope  = ["HK"]
+
+[data]
+required_inputs   = ["depth_intraday"]
+custom_exclusions = []
+
+[params]
+snapshot_time = "14:30"
+depth_levels  = 5

@@ -1,0 +1,32 @@
+# Template for an RtnAlpha (forward return). This is the only alpha type that carries
+# entry/exit timing, and it doubles as the realised-return source for the backtester
+# and post_trade_analyzer.
+
+[identity]
+name          = "my_rtn_alpha"
+description   = "One line on the return being measured"
+category      = "return"
+tags          = []
+formula       = "exit_price / entry_price - 1"
+handler_class = "alphaflow.signal_builder.alphas.rtn.my_rtn_alpha.MyRtnAlpha"
+alpha_type    = "rtn"
+market_scope  = ["HK"]
+
+[data]
+required_inputs   = ["minute_bar"]
+custom_exclusions = []
+
+# price_type is open | close | vwap.
+#   open/close -> optional session = "am" | "pm" (dual-session markets: HK, CN, SG)
+#   vwap       -> requires vwap_start and vwap_end as "HH:MM"
+[entry]
+price_type = "open"
+session    = "am"
+
+[exit]
+price_type = "close"
+session    = "pm"
+
+[timing]
+horizon     = 1                # days between entry and exit; 0 = intraday (session-validated)
+return_type = ["raw"]          # subset of ["raw", "hedged"]

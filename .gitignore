@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+
+# Local shared-drive root (see [storage].shared_drive_path / $ALPHAFLOW_SHARED_DRIVE)
+data/
+
+.ipynb_checkpoints/
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/

@@ -1,0 +1,27 @@
+[identity]
+name          = "open_to_close_1d"
+description   = "Next day AM open to PM close return, raw and hedged"
+category      = "return"
+tags          = ["forward_return"]
+formula       = "close(t+1, pm) / open(t+1, am) - 1, hedged by index return"
+handler_class = "alphaflow.signal_builder.alphas.rtn.open_to_close_1d.OpenToClose1D"
+alpha_type    = "rtn"
+market_scope  = ["HK", "CN", "SG"]
+
+[data]
+required_inputs   = ["minute_bar"]
+custom_exclusions = []
+
+[entry]
+price_type = "open"
+session    = "am"
+
+[exit]
+price_type = "close"
+session    = "pm"
+
+# NOTE: horizon/return_type live in [timing], not as bare keys after [exit] - TOML would
+# otherwise absorb them into the [exit] table.
+[timing]
+horizon     = 1
+return_type = ["raw", "hedged"]

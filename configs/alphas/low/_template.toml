@@ -1,0 +1,20 @@
+# Template for a LowAlpha (daily / multi-day). Copy, rename to <alpha_id>.toml,
+# then add a matching [[alphas]] entry to configs/registry.toml.
+
+[identity]
+name          = "my_low_alpha"                 # must equal the filename stem and the registry alpha_id
+description   = "One line on what the signal captures"
+category      = "momentum"                     # free-form grouping label
+tags          = []
+formula       = "Plain-language or pseudo-code statement of the calculation"
+handler_class = "alphaflow.signal_builder.alphas.low.my_low_alpha.MyLowAlpha"
+alpha_type    = "low"
+market_scope  = ["HK"]                         # must be a subset of the markets in system.toml
+
+[data]
+required_inputs   = ["minute_bar"]             # each must appear in that market's available_data_types
+custom_exclusions = []                         # RICs to drop regardless of data availability
+
+[params]
+lookback_days = 21
+skip_days     = 0

@@ -1,0 +1,70 @@
+# Storage, connections and per-market definitions. Read by every package.
+
+[storage]
+# Overridable at runtime with $ALPHAFLOW_SHARED_DRIVE (see core/config/paths.py).
+# On-prem this becomes /mnt/shared/alphaflow.
+shared_drive_path = "data"
+parquet_cold_path = "data/cold"
+log_path          = "data/logs"
+
+[kdb]
+# Connection profile for the on-prem desktool session. AlphaFlow never opens a kdb+
+# socket itself - all reads go through apcr_desktool (decision D13).
+host = "localhost"
+port = 5001
+
+# data_type -> kdb+ table name. PLACEHOLDERS: replace with the real kdb+ layout.
+[kdb.tables]
+depth_open     = "depth_snapshot"
+depth_close    = "depth_snapshot"
+depth_intraday = "depth_snapshot"
+indic_open     = "indicative"
+indic_close    = "indicative"
+minute_bar     = "minute_bar"
+ohlcv          = "daily_bar"
+tick           = "trade"
+risk_factors   = "barra_exposure"
+
+[bloomberg]
+timeout_seconds = 30
+
+[s3]
+bucket_name  = "my-alpha-bucket"
+region       = "ap-east-1"
+profile_name = ""
+
+# data_type -> S3 key template. PLACEHOLDERS: {market} and {date} (YYYYMMDD) are substituted.
+[s3.keys]
+intropic   = "intropic/{market}/{date}.csv"
+southbound = "southbound/{market}/{date}.csv"
+
+[scheduler]
+timezone = "Asia/Hong_Kong"
+
+[markets.HK]
+available_data_types = ["depth_open", "depth_close", "depth_intraday", "indic_open", "indic_close", "minute_bar", "bbg", "southbound"]
+sessions = [{ start = "09:30", end = "12:00" }, { start = "13:00", end = "16:00" }]
+
+[markets.CN]
+available_data_types = ["depth_open", "depth_close", "depth_intraday", "indic_open", "indic_close", "minute_bar", "bbg", "southbound"]
+sessions = [{ start = "09:30", end = "11:30" }, { start = "13:00", end = "15:00" }]
+
+[markets.SG]
+available_data_types = ["depth_open", "depth_close", "depth_intraday", "indic_open", "indic_close", "minute_bar", "bbg"]
+sessions = [{ start = "09:00", end = "12:00" }, { start = "13:00", end = "17:00" }]
+
+[markets.JP]
+available_data_types = ["depth_open", "depth_close", "depth_intraday", "indic_open", "indic_close", "minute_bar", "bbg"]
+sessions = [{ start = "09:00", end = "15:30" }]
+
+[markets.KR]
+available_data_types = ["depth_open", "depth_close", "depth_intraday", "minute_bar", "bbg"]
+sessions = [{ start = "09:00", end = "15:30" }]
+
+[markets.AU]
+available_data_types = ["depth_open", "depth_close", "depth_intraday", "minute_bar", "bbg"]
+sessions = [{ start = "10:00", end = "16:00" }]
+
+[markets.TW]
+available_data_types = ["depth_open", "depth_close", "depth_intraday", "minute_bar", "bbg"]
+sessions = [{ start = "09:00", end = "13:30" }]

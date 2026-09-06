@@ -1,0 +1,20 @@
+# Master list of every configured alpha. AlphaRegistry validates this against
+# configs/models/*.toml and configs/production.toml on construction.
+
+[[alphas]]
+alpha_id    = "momentum_price_21d"
+alpha_type  = "low"
+config_file = "configs/alphas/low/momentum_price_21d.toml"
+active      = true
+
+[[alphas]]
+alpha_id    = "order_imbalance_1430"
+alpha_type  = "high"
+config_file = "configs/alphas/high/order_imbalance_1430.toml"
+active      = true
+
+[[alphas]]
+alpha_id    = "open_to_close_1d"
+alpha_type  = "rtn"
+config_file = "configs/alphas/rtn/open_to_close_1d.toml"
+active      = true

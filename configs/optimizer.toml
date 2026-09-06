@@ -1,0 +1,11 @@
+# Mean-variance parameters. These apply to ALL models - model selection is passed
+# directly to OptimizerRunner.run(), never configured here.
+
+# NOTE: risk_model must sit above [mean_variance]; TOML would otherwise read a trailing
+# bare key as a member of that table (the spec's example has it below).
+risk_model = "barra_ase2s"
+
+[mean_variance]
+max_single_alpha_weight = 0.8
+min_single_alpha_weight = 0.0
+risk_aversion           = 1.0
